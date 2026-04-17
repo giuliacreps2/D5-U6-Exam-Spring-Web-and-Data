@@ -28,7 +28,7 @@ public class Travel {
     @Column(nullable = false)
     private LocalDate travelDate;
     @Enumerated(EnumType.STRING)
-    @Column(length = 2, nullable = false)
+    @Column(length = 20, nullable = false)
     private TravelStatus travelStatus;
 
     public Travel(String destination, LocalDate travelDate, TravelStatus travelStatus) {

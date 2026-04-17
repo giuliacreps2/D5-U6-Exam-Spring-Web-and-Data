@@ -36,9 +36,10 @@ public class Booking {
     @JoinColumn(name = "travel_id")
     private Travel travel;
 
-    public Booking(LocalDate bookingDate, String notes, Employee employee) {
+    public Booking(LocalDate bookingDate, String notes, Employee employee, Travel travel) {
         this.bookingDate = bookingDate;
         this.notes = notes;
         this.employee = employee;
+        this.travel = travel;
     }
 }
