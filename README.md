@@ -1,6 +1,11 @@
 ```
+<<<<<<< Updated upstream
 🌍 Sistema di Gestione Viaggi Aziendali
 Questo progetto nasce con l'obiettivo di semplificare la logistica dei dipendenti, permettendo la gestione dei viaggi, delle prenotazioni e dei profili utente in modo automatizzato e sicuro.
+=======
+
+Employee
+>>>>>>> Stashed changes
 
 💡 Il Progetto
 L'applicazione è un'API REST costruita con Spring Boot che funge da cuore pulsante per l'organizzazione aziendale. Gestisce tre domini principali:Dipendenti: Anagrafica e gestione identità visiva.Viaggi: Pianificazione delle destinazioni e monitoraggio dello stato (Programmato/Completato).Prenotazioni: La logica che unisce dipendenti e viaggi, garantendo l'assenza di conflitti temporali.

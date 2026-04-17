@@ -39,7 +39,7 @@ public class EmployeesService {
         //TODO: Controllo che la mail non sia già in uso
 
         //Creo un nuovo utente
-        Employee newEmployee = new Employee(body.name(), body.email());
+        Employee newEmployee = new Employee(body.name(), body.email(), body.surname(), body.username(), "https://ui-avatars.com/api/?name=" + body.name() + "+" + body.surname());
         Employee savedEmployee = this.employeesRepository.save(newEmployee);
 
         log.info("L'utente con id: " + savedEmployee.getEmployeeId() + " e " + savedEmployee.getName() + "è stato salvato con successo");
@@ -85,7 +85,7 @@ public class EmployeesService {
 
 
     //5. UPLOAD Immagini
-    public void avatarUpload(MultipartFile file, UUID employeeId) {
+    public void avatarUpload(MultipartFile file, UUID employeeId) throws IOException {
         //Controllo se il file è più grande di un tot
         if (file.getContentType() == null || !file.getContentType().equals("image/jpeg") || file.isEmpty())
             throw new ValidationException("Il formato del file non è valido");
@@ -95,13 +95,11 @@ public class EmployeesService {
         //Devo fare il find by id dell'utente
         Employee found = findById(employeeId);
         //3.Upload del file
-        try {
-            Map result = cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            String url = (String) result.get("secure_url");
-            log.info(url.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Map result = cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+        String url = (String) result.get("secure_url");
+        found.setAvatarUrl(url);
+        this.employeesRepository.save(found);
+        log.info("Nuova immagine profilo salvata" + url);
     }
 
 

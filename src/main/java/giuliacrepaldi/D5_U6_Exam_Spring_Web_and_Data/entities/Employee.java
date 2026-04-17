@@ -28,9 +28,14 @@ public class Employee {
     private String surname;
     @Column
     private String email;
+    @Column
+    private String avatarUrl;
 
-    public Employee(String name, String email) {
+    public Employee(String username, String name, String surname, String email, String avatarUrl) {
+        this.username = username;
         this.name = name;
+        this.surname = surname;
         this.email = email;
+        this.avatarUrl = avatarUrl;
     }
 }
