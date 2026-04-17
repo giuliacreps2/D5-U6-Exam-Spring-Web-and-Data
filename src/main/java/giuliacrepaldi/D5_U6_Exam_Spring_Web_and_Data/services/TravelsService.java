@@ -32,7 +32,7 @@ public class TravelsService {
         //Converto String di TravelDTO in Enum con gestione degli errori
         TravelStatus travelStatus;
         try {
-            travelStatus = TravelStatus.valueOf(body.travelStatus().toLowerCase());
+            travelStatus = TravelStatus.valueOf(body.travelStatus().toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new BadRequestException("Stato non valido. Usa 'SCHEDULED' o 'COMPLETED");
         }
@@ -64,7 +64,10 @@ public class TravelsService {
     public Travel findByIdAndUpdate(UUID travelId, String travelStatus) {
         //Controllo che il viaggio non esista di già
         Travel found = this.travelsRepository.findById(travelId).orElseThrow(() -> new NotFoundException(travelId));
-
+        //Controllo che la data non sia passata
+        if (found.getTravelDate().isBefore(LocalDate.now())) {
+            throw new BadRequestException("La data non può essere nel passato");
+        }
         //Controllo se il viaggio ha lo stato COMPLETATO
         try {
             found.setTravelStatus(TravelStatus.valueOf(travelStatus.toUpperCase()));

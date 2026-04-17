@@ -36,7 +36,7 @@ public class EmployeesService {
 
     //1.SAVE
     public Employee saveEmployee(EmployeeDTO body) {
-        //Controllo che la mail non sia già in uso
+        //TODO: Controllo che la mail non sia già in uso
 
         //Creo un nuovo utente
         Employee newEmployee = new Employee(body.name(), body.email());
@@ -52,11 +52,6 @@ public class EmployeesService {
         return this.employeesRepository.findById(employeeId).orElseThrow(() -> new NotFoundException(employeeId));
     }
 
-
-//    //3.FINDALLUSERS
-//    public List<User> findAll(User user) {
-//        return this.usersRepository.findAll();
-//    }
 
     //3.UPDATE
     public Employee findByIdAndUpdate(UUID employeeId, EmployeeDTO body) {

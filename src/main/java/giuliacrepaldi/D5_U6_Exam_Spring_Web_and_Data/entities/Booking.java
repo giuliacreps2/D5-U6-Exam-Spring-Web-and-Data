@@ -23,13 +23,10 @@ public class Booking {
     private UUID bookingId;
 
     @Column(nullable = false)
-    private LocalDate requestDate;
+    private LocalDate bookingDate;
     @Column
     private String notes;
-    @Column(nullable = false)
-    private LocalDate startDate;
-    @Column(nullable = false)
-    private LocalDate endDate;
+
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -39,11 +36,9 @@ public class Booking {
     @JoinColumn(name = "travel_id")
     private Travel travel;
 
-    public Booking(LocalDate requestDate, String notes, LocalDate startDate, LocalDate endDate, Employee employee) {
-        this.requestDate = requestDate;
+    public Booking(LocalDate bookingDate, String notes, Employee employee) {
+        this.bookingDate = bookingDate;
         this.notes = notes;
-        this.startDate = startDate;
-        this.endDate = endDate;
         this.employee = employee;
     }
 }
