@@ -28,9 +28,10 @@ POST                        /bookings                      Assegna un dipendente
 putStatusTravel
 deleteTravel
 
-
-////////
-SERVICE BOOKING
-saveBooking
---->controllo che un dipendente abbia un solo viaggio
---->gestione errori con status code
+<img width="1799" height="427" alt="Screenshot 2026-04-17 165013" src="https://github.com/user-attachments/assets/0a3b3f77-b97a-49d6-9d71-463a268fc430" />
+<img width="1626" height="827" alt="Screenshot 2026-04-17 163629" src="https://github.com/user-attachments/assets/94e7e144-e669-4b3e-adba-019ba880a157" />
+<img width="1508" height="379" alt="Screenshot 2026-04-17 163452" src="https://github.com/user-attachments/assets/9a26b975-2a4e-4d56-bd29-2c59299ff03f" />
+<img width="1630" height="636" alt="Screenshot 2026-04-17 162726" src="https://github.com/user-attachments/assets/34b2fbae-46ca-41ba-b422-cf7f5bfc0beb" />
+<img width="1637" height="758" alt="Screenshot 2026-04-17 162632" src="https://github.com/user-attachments/assets/f0d14b79-ffe1-40a9-8883-fce9cc3db812" />
+<img width="1508" height="754" alt="Screenshot 2026-04-17 162602" src="https://github.com/user-attachments/assets/dd8dfae8-2779-4d65-8ec4-1f366a331145" />
+<img width="896" height="543" alt="Screenshot 2026-04-17 125708" src="https://github.com/user-attachments/assets/6014336c-de49-401f-80bc-dcb1d663006f" />
