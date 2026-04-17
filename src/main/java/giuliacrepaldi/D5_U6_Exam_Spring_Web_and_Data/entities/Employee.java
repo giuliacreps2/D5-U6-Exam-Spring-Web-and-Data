@@ -14,11 +14,11 @@ import java.util.UUID;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "employees")
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID userId;
+    private UUID employeeId;
 
     @Column(unique = true)
     private String username;
@@ -29,7 +29,7 @@ public class User {
     @Column
     private String email;
 
-    public User(String name, String email) {
+    public Employee(String name, String email) {
         this.name = name;
         this.email = email;
     }

@@ -1,6 +1,7 @@
 package giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.exceptions;
 
 import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.payloads.ErrorsDTO;
+import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.payloads.ErrorsWithListDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

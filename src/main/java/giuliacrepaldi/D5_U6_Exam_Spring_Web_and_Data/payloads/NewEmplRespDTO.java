@@ -2,5 +2,5 @@ package giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.payloads;
 
 import java.util.UUID;
 
-public record NewUserRespDTO(UUID userId) {
+public record NewEmplRespDTO(UUID employeeId) {
 }

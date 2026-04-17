@@ -2,52 +2,54 @@ package giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.services;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.entities.User;
+import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.entities.Employee;
 import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.exceptions.BadRequestException;
 import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.exceptions.NotFoundException;
 import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.exceptions.ValidationException;
-import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.payloads.UserDTO;
-import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.repositories.UsersRepository;
+import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.payloads.EmployeeDTO;
+import giuliacrepaldi.D5_U6_Exam_Spring_Web_and_Data.repositories.EmployeesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
+@Service
 @Slf4j
-public class UsersService {
+public class EmployeesService {
     //Dipendenze
-    private final UsersRepository usersRepository;
+    private final EmployeesRepository employeesRepository;
     private final Cloudinary cloudinaryUploader;
 
     //Costruttore
-    public UsersService(UsersRepository usersRepository, Cloudinary cloudinaryUploader) {
-        this.usersRepository = usersRepository;
+    public EmployeesService(EmployeesRepository employeesRepository, Cloudinary cloudinaryUploader) {
+        this.employeesRepository = employeesRepository;
         this.cloudinaryUploader = cloudinaryUploader;
     }
 
 
     //1.SAVE
-    public User saveUser(UserDTO body) {
+    public Employee saveEmployee(EmployeeDTO body) {
         //Controllo che la mail non sia già in uso
 
         //Creo un nuovo utente
-        User newUser = new User(body.name(), body.email());
-        User savedUser = this.usersRepository.save(newUser);
+        Employee newEmployee = new Employee(body.name(), body.email());
+        Employee savedEmployee = this.employeesRepository.save(newEmployee);
 
-        log.info("L'utente con id: " + savedUser.getUserId() + " e " + savedUser.getName() + "è stato salvato con successo");
-        return savedUser;
+        log.info("L'utente con id: " + savedEmployee.getEmployeeId() + " e " + savedEmployee.getName() + "è stato salvato con successo");
+        return savedEmployee;
     }
 
 
     //2.FINDBYID
-    public User findById(UUID userId) {
-        return this.usersRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
+    public Employee findById(UUID employeeId) {
+        return this.employeesRepository.findById(employeeId).orElseThrow(() -> new NotFoundException(employeeId));
     }
 
 
@@ -57,12 +59,12 @@ public class UsersService {
 //    }
 
     //3.UPDATE
-    public User findByIdAndUpdate(UUID userId, UserDTO body) {
-        User found = this.usersRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
+    public Employee findByIdAndUpdate(UUID employeeId, EmployeeDTO body) {
+        Employee found = this.employeesRepository.findById(employeeId).orElseThrow(() -> new NotFoundException(employeeId));
 
         //Controllo che la mail sia in uso e che questo controllo avvenga solo se sta effettivamente cambiando email
         if (!found.getEmail().equals(body.email())) {
-            if (this.usersRepository.existsByEmail(body.email()))
+            if (this.employeesRepository.existsByEmail(body.email()))
                 throw new BadRequestException(("L'indirizzo email " + body.email() + " è già in uso!"));
         }
 
@@ -71,24 +73,24 @@ public class UsersService {
         found.setEmail(body.email());
 
         //Salvo le modifiche
-        User updateUser = this.usersRepository.save(found);
+        Employee updateEmployee = this.employeesRepository.save(found);
 
         //Log
-        log.info("L'utente " + updateUser.getUserId() + " è stato modificato correttamente");
+        log.info("L'utente " + updateEmployee.getEmployeeId() + " è stato modificato correttamente");
 
-        return updateUser;
+        return updateEmployee;
     }
 
 
     //4.DELETE
-    public void findByIdAndDelete(UUID userId) {
-        User found = this.usersRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
-        this.usersRepository.delete(found);
+    public void findByIdAndDelete(UUID employeeId) {
+        Employee found = this.employeesRepository.findById(employeeId).orElseThrow(() -> new NotFoundException(employeeId));
+        this.employeesRepository.delete(found);
     }
 
 
     //5. UPLOAD Immagini
-    public void avatarUpload(MultipartFile file, UUID userId) {
+    public void avatarUpload(MultipartFile file, UUID employeeId) {
         //Controllo se il file è più grande di un tot
         if (file.getContentType() == null || !file.getContentType().equals("image/jpeg") || file.isEmpty())
             throw new ValidationException("Il formato del file non è valido");
@@ -96,7 +98,7 @@ public class UsersService {
             throw new ValidationException("Il file non deve superare i 2 MB");
 
         //Devo fare il find by id dell'utente
-        User found = findById(userId);
+        Employee found = findById(employeeId);
         //3.Upload del file
         try {
             Map result = cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
@@ -109,11 +111,11 @@ public class UsersService {
 
 
     //6.PAGINE
-    public Page<User> findAll(int page, int size, String sortBy) {
+    public Page<Employee> findAll(int page, int size, String sortBy) {
         if (size > 100 || size < 0) size = 10;
         if (page < 0) page = 0;
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        return this.usersRepository.findAll(pageable);
+        return this.employeesRepository.findAll(pageable);
     }
 }
 

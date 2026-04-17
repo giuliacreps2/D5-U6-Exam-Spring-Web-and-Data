@@ -17,7 +17,9 @@ public class Config {
     public Cloudinary getImageUploader(@Value("${cloudinary.name}") String cloudName,
                                        @Value("${cloudinary.apikey}") String apiKey,
                                        @Value("${cloudinary.secret}") String apiSecret) {
-        log.info("è andato tutto a buon fine: " + getImageUploader(cloudName, apiKey, apiSecret).toString());
+        log.info(cloudName);
+        log.info(apiKey);
+        log.info(apiSecret);
 
         Map<String, String> configuration = new HashMap<>();
         configuration.put("cloud_name", cloudName);

@@ -28,3 +28,21 @@ notes
 @JoinColumn
 private Employee employee
 
+/////////
+SERVICE EMPLOYEE
+CRUD
+
+
+////////
+SERVICE TRAVEL
+findById
+saveTravel
+putStatusTravel
+deleteTravel
+
+
+////////
+SERVICE BOOKING
+saveBooking
+--->controllo che un dipendente abbia un solo viaggio
+--->gestione errori con status code
