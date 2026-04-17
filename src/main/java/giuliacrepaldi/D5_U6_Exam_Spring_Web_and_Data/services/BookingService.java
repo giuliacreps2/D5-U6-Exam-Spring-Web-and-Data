@@ -50,6 +50,7 @@ public class BookingService {
         }
 
         Booking newBooking = new Booking(bookingDTO.bookingDate(), bookingDTO.notes(), foundEmployee, foundTravel);
+        Booking savedBooking = this.bookingsRepository.save(newBooking);
         log.info("La prenotazione è avvenuta con successo: " + newBooking.toString());
         return newBooking;
     }
