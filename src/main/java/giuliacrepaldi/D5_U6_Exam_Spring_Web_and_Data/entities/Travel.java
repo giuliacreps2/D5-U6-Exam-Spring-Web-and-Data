@@ -26,14 +26,14 @@ public class Travel {
     @Column(nullable = false)
     private String destination;
     @Column(nullable = false)
-    private LocalDate bookingDate;
+    private LocalDate travelDate;
     @Enumerated(EnumType.STRING)
     @Column(length = 2, nullable = false)
     private TravelStatus travelStatus;
 
-    public Travel(String destination, LocalDate bookingDate, TravelStatus travelStatus) {
+    public Travel(String destination, LocalDate travelDate, TravelStatus travelStatus) {
         this.destination = destination;
-        this.bookingDate = bookingDate;
+        this.travelDate = travelDate;
         this.travelStatus = travelStatus;
     }
 

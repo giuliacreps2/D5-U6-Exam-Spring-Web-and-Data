@@ -14,9 +14,6 @@ destination
 bookingDate
 travelStatus
 
-@ManyToOne
-@JoinColumn
-private Booking Booking
 -------------
 
 Booking
@@ -25,8 +22,12 @@ requestDate
 notes
 
 @ManyToOne
-@JoinColumn
-private Employee employee
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "travel_id")
+    private Travel travel;
 
 /////////
 SERVICE EMPLOYEE
